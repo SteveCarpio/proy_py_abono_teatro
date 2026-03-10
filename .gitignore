@@ -9,6 +9,10 @@ __pycache__/
 *.spec
 build/
 dist/
+Lib/
+pip/
+_vendor/
+distlib/
 
 # Ignorar dependencias si usas pipenv o poetry
 Pipfile
