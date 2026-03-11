@@ -54,8 +54,6 @@ def iniciar():
         wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 
         # FORMULARIO DATOS DEL USUARIO
-        print(f"URL actual: {driver.current_url}")
-        print(f"Título: {driver.title}")
 
         # Rellenamos el usuario
         print("✏️ Rellenando usuario...")
@@ -70,17 +68,6 @@ def iniciar():
         campo_pass.send_keys(sTv.PASSWORD)
         print("✔️ Contraseña introducida")
         
-        # Intentamos cerrar el banner que aveces aparece específico 'cmplz' que está molestando
-        try:
-            # Buscamos el botón de aceptar cookies por si sigue visible
-            # Usamos un selector genérico para este tipo de banners
-            cookie_close = driver.find_element(By.CSS_SELECTOR, ".cmplz-btn")
-            if cookie_close.is_displayed():
-                cookie_close.click()
-                print("🍪 Cerrada ventana de cookies persistente")
-                time.sleep(1) # Esperamos a que se anime y desaparezca
-        except:
-            pass # Si no está, perfecto, seguimos
 
         # Botón ENTRAR (Usando JavaScript para evitar bloqueos)
         print("🖱️ Haciendo click en Entrar...")
@@ -89,15 +76,32 @@ def iniciar():
         print("✅ Click realizado. Esperando respuesta...")
 
 
-        # --- ENTRAR EN EL IFRAME ---
-        print("🔍 Buscando el iframe de programación...")
-        iframe = wait.until(EC.presence_of_element_located((By.TAG_NAME, "iframe"))) # Esperamos a que el iframe exista y nos cambiamos a él
-        driver.switch_to.frame(iframe)
-        print("✅ Estamos DENTRO del iframe. Ahora sí se ven las obras.")
-        print(f"URL actual: {driver.current_url} en teoria estamos aqui: https://compras.abonoteatro.com/teatro/ ") 
-        print(f"Título: {driver.title}")
-        time.sleep(3) 
 
+        # 3 - WEB LISTADO DE OBRAS
+        wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+        print(f"URL actual: {driver.current_url}")
+        print(f"Título: {driver.title}")
+        time.sleep(4)
+
+
+
+        # PROVINCIA MADRID
+        select_provincia = driver.find_element(By.XPATH,'//*[@id="select_provincia_event"]')
+        print(f"Provincia Inicio: {select_provincia.text}")
+        select_provincia.send_keys("MADRID")
+
+        select_provinciax = driver.find_element(By.XPATH,'//*[@id="select_provincia_event"]')
+        print(f"Provincia Final: {select_provinciax.text}")
+
+
+
+
+
+
+
+
+
+     
         # --- CAPTURAR DATOS (DENTRO DEL IFRAME) ---
         print("📋 Buscando listado de obras...")
         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.noo-tribe-events-header h2 a"))) # Esperamos a que cargue al menos un título
@@ -109,8 +113,7 @@ def iniciar():
             print(f"  {i+1}. {nombre}")
             # Ejemplo: archivo.write(nombre + "\n")
 
-        # IMPORTANTE: Al terminar, volvemos al contexto principal
-        driver.switch_to.default_content()
+  
 
       
 
