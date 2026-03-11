@@ -2,18 +2,12 @@ import cfg.variables as sTv
 from   cfg.librerias import *
 from   cfg.cookies import aceptar_cookies
 
-
-
-# --- CONFIGURACIÓN ---
-
-
-
-
 def iniciar():
     # 1- CARGA PARAMETROS
     print("🚀 Iniciando navegador")
     options = uc.ChromeOptions()
-    options.add_argument("--start-maximized")    
+    options.add_argument("--start-maximized")
+    #options.add_argument("--headless=new")  # MODO INVISIBLE (HEADLESS) 
     driver = uc.Chrome(options=options)
     wait = WebDriverWait(driver, 20)
 
