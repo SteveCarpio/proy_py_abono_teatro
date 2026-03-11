@@ -2,6 +2,8 @@ import cfg.variables as sTv
 from   cfg.librerias import *
 from   cfg.cookies import aceptar_cookies
 
+# investiga:  https://programacion.abonoteatro.com/catalogo/teatros3.php?token=afuihA5GtKvlX6VvX5FAsW
+
 def iniciar():
     # -- CARGA PARAMETROS ---
     print("🚀 Iniciando navegador")
